@@ -61,6 +61,16 @@ def letsBegin(db):
                     continue
                 businesses.printBusinessInfo(data)
 
+            case "8":
+                print("You entered 8")
+                state = input("Enter a state: ")
+                city = input("Enter a city: ")
+                t = input("Enter a type of restaurant: ")
+                data = businesses.getTopRatedRestaurantByTypeCityState(t, state, city)
+                if data is None:
+                    print("No data found")
+                    continue
+                businesses.printBusinessInfo(data)
 
             case "9":
                 state = input("Enter a state: ")

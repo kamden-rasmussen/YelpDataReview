@@ -116,6 +116,31 @@ class Businesses:
 
         return data
 
+    def getTopRatedRestaurantByTypeCityState(self, type, state, city):
+            query = '''
+            SELECT *
+            FROM businesses
+            WHERE state = ?
+            AND city = ?
+            AND categories LIKE ?
+            AND review_count > 100
+            ORDER BY stars DESC
+            LIMIT 1
+            '''
+            data = self.cursor.execute(query, (state, city, '%' + type + '%')).fetchone()
+            if data is None:
+                query = '''
+                SELECT *
+                FROM businesses
+                WHERE state = ?
+                AND city = ?
+                AND categories LIKE ?
+                ORDER BY stars DESC
+                LIMIT 1
+                '''
+                data = self.cursor.execute(query, (state, city, '%' + type + '%')).fetchone()
+
+            return data
 
 # {"business_id":"Pns2l4eNsfO8kk83dixA6A","name":"Abby Rappoport, LAC, CMQ","address":"1616 Chapala St, Ste 2","city":"Santa Barbara","state":"CA","postal_code":"93101","latitude":34.4266787,"longitude":-119.7111968,"stars":5.0,"review_count":7,"is_open":0,"attributes":{"ByAppointmentOnly":"True"},"categories":"Doctors, Traditional Chinese Medicine, Naturopathic\/Holistic, Acupuncture, Health & Medical, Nutritionists","hours":null}
     def printBusinessInfo(self, data):
