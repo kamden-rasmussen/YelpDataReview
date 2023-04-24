@@ -9,11 +9,15 @@ class DBClass:
         self.cursor.execute('SELECT SQLITE_VERSION()')
         data = self.cursor.fetchone()
         print("SQLite version: %s" % data)
-        self.cursor.execute('CREATE TABLE IF NOT EXISTS businesses (business_id varchar PRIMARY KEY, name varchar, city varchar, state varchar, stars float64, review_count INTEGER, categories varchar)')
-        self.cursor.execute('CREATE TABLE IF NOT EXISTS reviews (review_id varchar PRIMARY KEY, business_id varchar, stars float64, text varchar)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS businesses (business_id text PRIMARY KEY, name text, city text, state text, stars float64, review_count INTEGER, categories text)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS reviews (review_id text PRIMARY KEY, business_id text, stars float64, text text)')
 
     def firstTimeSetup(self):
-        print('first time setup')
-        setup.PUTBusinessesInDB(self)
-        print('businesses put in db')
+        if self.cursor.execute('SELECT * FROM businesses').fetchone() is None:
+            print('first time setup businesses')
+            setup.PUTBusinessesInDB(self)
+        if self.cursor.execute('SELECT * FROM reviews').fetchone() is None:
+            print('first time setup reviews')
+            setup.PUTReviewsInDB(self)
+
 
