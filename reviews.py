@@ -53,6 +53,20 @@ class Reviews:
         '''
         return self.cursor.execute(query, (state, '%' + type + '%', state, '%' + type + '%')).fetchall()
 
+    def get5RandomReviewsForRestaurantByName(self, name):
+        query = '''
+        select stars, text
+        from reviews
+        where business_id = (
+            select business_id
+            from businesses
+            where name = ?
+        )
+        order by RANDOM()
+        limit 5
+        '''
+        return self.cursor.execute(query, (name,)).fetchall()
+
     def printReviewData(self, data):
         print('Stars:', data[0])
         print('Text:', data[1])

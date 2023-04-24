@@ -93,6 +93,13 @@ def letsBegin(db):
                 for row in data:
                     reviews.printReviewData(row)
 
+            case "12":
+                name = input("Enter a business name: ")
+                data = reviews.get5RandomReviewsForRestaurantByName(name)
+                for row in data:
+                    reviews.printReviewData(row)
+                    
+
             case "exit":
                 print("Goodbye!")
                 return
