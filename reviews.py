@@ -32,9 +32,28 @@ class Reviews:
         '''
         return self.cursor.execute(query).fetchall()
 
+    def getReviewsForTopRatedRestaurantByType(self, type, state):
+        query = ''' 
+        select stars, text
+        from reviews
+        where 
+        business_id = (
+            select business_id
+            from businesses
+            where state = ? 
+            and categories like ? 
+            and stars = (
+                select max(stars)
+                from businesses
+                where state = ? and categories like ?
+            )
+        )
+        order by stars DESC
+        limit 5
+        '''
+        return self.cursor.execute(query, (state, '%' + type + '%', state, '%' + type + '%')).fetchall()
+
     def printReviewData(self, data):
-        print('Review ID:', data[0])
-        print('Business ID:', data[1])
-        print('Stars:', data[2])
-        print('Text:', data[3])
+        print('Stars:', data[0])
+        print('Text:', data[1])
         print('')

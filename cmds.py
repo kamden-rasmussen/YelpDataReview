@@ -79,6 +79,20 @@ def letsBegin(db):
                 for row in data:
                     businesses.printBusinessInfo(row)
 
+            case "10":
+                state = input("Enter a state: ")
+                t = input("Enter a type of restaurant: ")
+                data = reviews.getReviewsForTopRatedRestaurantByType(t, state)
+                for row in data:
+                    reviews.printReviewData(row)
+
+            case "11":
+                state = input("Enter a state: ")
+                t = input("Enter a type of restaurant: ")
+                data = reviews.getReviewsForTopRatedRestaurantByTypeLowest(t, state)
+                for row in data:
+                    reviews.printReviewData(row)
+
             case "exit":
                 print("Goodbye!")
                 return
