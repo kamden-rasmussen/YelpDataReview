@@ -15,18 +15,21 @@ def letsBegin(db):
         match userInput:
             case "1":
                 print("You entered 1")
-                data = businesses.newYorkPizzaQuery()
-                print("New Yorkers like pizza this much: " + str(data))
+                data = businesses.floridaPizzaQuery()
+                data = round(data, 2)
+                print("Floridians average pizza rating is : " + str(data) + " out of 5")
 
             case "2":
                 print("You entered 2")
                 data = businesses.californiaMexicanQuery()
-                print("Californians like Mexican this much: " + str(data))
+                data = round(data, 2)
+                print("Californians average mexican rating is : " + str(data) + " out of 5")
 
             case "3":
                 print("You entered 3")
-                data = businesses.utahSodaQuery()
-                print("Utahns like soda this much: " + str(data))
+                data = businesses.PhiladelphiaBarQuery()
+                data = round(data, 2)
+                print("Philadelphia average bar rating is : " + str(data) + " out of 5")
 
             case "4":
                 print("You entered 4")
@@ -40,6 +43,23 @@ def letsBegin(db):
                 print("Top 10 states with most reviews: ")
                 for row in data:
                     print(row[0] + " with " + str(row[1]) + " reviews")
+
+            case "6":
+                print("You entered 6")
+                state = input("Enter a state: ")
+                t = input("Enter a type of restaurant: ")
+                data = businesses.getCountOfTypeOfRestaurantsByState(t, state)
+                print("There are " + str(data) + " " + t + " restaurants in " + state)
+
+            case "7":
+                print("You entered 7")
+                state = input("Enter a state: ")
+                t = input("Enter a type of restaurant: ")
+                data = businesses.getTopRatedRestaurantByType(t, state)
+                if data is None:
+                    print("No data found")
+                    continue
+                businesses.printBusinessInfo(data)
 
 
             case "9":
