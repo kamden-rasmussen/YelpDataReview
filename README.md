@@ -30,3 +30,22 @@ The easiest way to run the program is by using `make run` in the terminal. The p
 | 13. | Get most reviewed restaurants |
 | 14. | Get highest rated restaurants |
 | exit | Exit program |
+
+# Business Table
+| Column Name | Type |
+| --- | --- |
+| business_id | 
+| name | VARCHAR |
+| city | VARCHAR |
+| state | VARCHAR |
+| stars | INT |
+| review_count | INT |
+| categories | VARCHAR |
+
+# Review Table
+| Column Name | Type |
+| --- | --- |
+| review_id | VARCHAR | 
+| business_id | VARCHAR |
+| stars | FLOAT | 
+| text | VARCHAR |
