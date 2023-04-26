@@ -34,7 +34,7 @@ The easiest way to run the program is by using `make run` in the terminal. The p
 # Business Table
 | Column Name | Type |
 | --- | --- |
-| business_id | 
+| business_id | VARCHAR |
 | name | VARCHAR |
 | city | VARCHAR |
 | state | VARCHAR |
